@@ -1,7 +1,8 @@
 # Package @xorde-labs/log-utils
 
 [![Release & Publish](https://github.com/xorde-labs/log-utils/actions/workflows/publish.yml/badge.svg)](https://github.com/xorde-labs/log-utils/actions/workflows/publish.yml)
-[![Test](https://github.com/xorde-labs/log-utils/actions/workflows/test.yml/badge.svg)](https://github.com/xorde-labs/log-utils/actions/workflows/test.yml)
+[![Tests](https://github.com/xorde-labs/log-utils/actions/workflows/tests.yml/badge.svg)](https://github.com/xorde-labs/log-utils/actions/workflows/tests.yml)
+[![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 
 A collection of handy functions for logging
 
