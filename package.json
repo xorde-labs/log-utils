@@ -1,6 +1,6 @@
 {
   "name": "@xorde-labs/log-utils",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "keywords": ["log", "serialization", "helper"],
   "description": "A collection of handy functions for logging",
   "main": "dist/cjs/index.js",
