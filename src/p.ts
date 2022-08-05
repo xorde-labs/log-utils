@@ -1,22 +1,6 @@
-// Borrowed from https://github.com/react-hook-form/react-hook-form/blob/274d8fb950f9944547921849fb6b3ee6e879e358/src/types/utils.ts#L86
-
-export type Primitive = null | undefined | string | number | boolean | symbol | bigint;
-
-type IsTuple<T extends ReadonlyArray<any>> = number extends T['length'] ? false : true;
-type TupleKey<T extends ReadonlyArray<any>> = Exclude<keyof T, keyof any[]>;
-type ArrayKey = number;
-
-type PathImpl<K extends string | number, V> = V extends Primitive ? `${K}` : `${K}` | `${K}.${Path<V>}`;
-
-export type Path<T> = T extends ReadonlyArray<infer V>
-	? IsTuple<T> extends true
-		? {
-				[K in TupleKey<T>]-?: PathImpl<K & string, T[K]>;
-		  }[TupleKey<T>]
-		: PathImpl<ArrayKey, V>
-	: {
-			[K in keyof T]-?: PathImpl<K & string, T[K]>;
-	  }[keyof T];
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+/* prettier-ignore */ export type NestedKeyOf<ObjectType extends object> = { [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}` : `${Key}` }[keyof ObjectType & (string | number)];
 
 /**
  * Picks selected properties from the object up to 3 levels deep
@@ -24,7 +8,7 @@ export type Path<T> = T extends ReadonlyArray<infer V>
  * @param props Array of original object properties
  * @return obj Object with picked properties
  */
-export const p = <T extends object>(obj: T, props: Path<T>[]) => {
+export const p = <T extends object>(obj: T, props: NestedKeyOf<T>[]) => {
 	const accumulator = {};
 
 	props.forEach((prop: any) => {
