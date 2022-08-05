@@ -1,20 +1,22 @@
-// Thanks to https://stackoverflow.com/a/58436959/16323129 for a hint how to set specified depth
+// Borrowed from https://github.com/react-hook-form/react-hook-form/blob/274d8fb950f9944547921849fb6b3ee6e879e358/src/types/utils.ts#L86
 
-type Prev = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, ...0[]];
+export type Primitive = null | undefined | string | number | boolean | symbol | bigint;
 
-type Join<K, P> = K extends string | number
-	? P extends string | number
-		? `${K}${'' extends P ? '' : '.'}${P}`
-		: never
-	: never;
+type IsTuple<T extends ReadonlyArray<any>> = number extends T['length'] ? false : true;
+type TupleKey<T extends ReadonlyArray<any>> = Exclude<keyof T, keyof any[]>;
+type ArrayKey = number;
 
-type Paths<T, D extends number = 10> = [D] extends [never]
-	? never
-	: T extends object
-	? {
-			[K in keyof T]-?: K extends string | number ? `${K}` | Join<K, Paths<T[K], Prev[D]>> : never;
-	  }[keyof T]
-	: never;
+type PathImpl<K extends string | number, V> = V extends Primitive ? `${K}` : `${K}` | `${K}.${Path<V>}`;
+
+export type Path<T> = T extends ReadonlyArray<infer V>
+	? IsTuple<T> extends true
+		? {
+				[K in TupleKey<T>]-?: PathImpl<K & string, T[K]>;
+		  }[TupleKey<T>]
+		: PathImpl<ArrayKey, V>
+	: {
+			[K in keyof T]-?: PathImpl<K & string, T[K]>;
+	  }[keyof T];
 
 /**
  * Picks selected properties from the object up to 3 levels deep
@@ -22,7 +24,7 @@ type Paths<T, D extends number = 10> = [D] extends [never]
  * @param props Array of original object properties
  * @return obj Object with picked properties
  */
-export const p = <T extends object>(obj: T, props: Array<Paths<T, 3>>) => {
+export const p = <T extends object>(obj: T, props: Path<T>[]) => {
 	const accumulator = {};
 
 	props.forEach((prop: any) => {

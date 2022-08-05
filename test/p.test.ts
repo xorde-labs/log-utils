@@ -1,14 +1,5 @@
 import { p } from '../src';
-
-const obj: any = {
-	n: 1,
-	b: true,
-	o: {
-		s: '2',
-		n: 3,
-		b: false,
-	}
-}
+import { obj } from './obj';
 
 /**
  *
