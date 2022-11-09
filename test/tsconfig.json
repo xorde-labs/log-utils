@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"removeComments": false,
+		"noEmit": true,
+		"strict": true,
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"include": ["**/*"]
+}

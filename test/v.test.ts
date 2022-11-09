@@ -1,26 +1,25 @@
 import { v } from '../src';
-import { obj } from './obj';
-
+import { testObject } from './testObject';
 
 /**
  *
  */
 test('simple', () => {
-	expect(v(obj)).toBe('n=1, b=true, o=(s=2, n=3, b=false)');
+	expect(v(testObject)).toBe('n=1, b=true, o=(s=2, n=3, b=false)');
 });
 
 /**
  *
  */
 test('with_max', () => {
-	expect(v(obj, [], 2)).toBe('n=1, b=true, ...more[1]');
+	expect(v(testObject, [], 2)).toBe('n=1, b=true, ...more[1]');
 });
 
 /**
  *
  */
 test('with_levels', () => {
-	expect(v(obj, [], null, 1)).toBe('n=1, b=true, o=(MAX_RECURSIVE_LEVELS_REACHED)');
+	expect(v(testObject, [], null, 1)).toBe('n=1, b=true, o=(MAX_RECURSIVE_LEVELS_REACHED)');
 });
 
 /**
