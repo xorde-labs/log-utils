@@ -34,7 +34,7 @@
     "url": "git+https://github.com/xorde-labs/log-utils.git"
   },
   "author": "xt@xorde.co",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/xorde-labs/log-utils/issues"
   },
